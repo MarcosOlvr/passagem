@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prefeitura Municipal de Passagem - RN</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Passagem.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow p-0">
+            <div class="container-fluid">
+                <button class="navbar-toggler m-auto py-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-primary" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-light"><i class="bi bi-chevron-double-down"></i></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbar-collapse-primary">
+                <a class="nav-link text-light fds" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo-passagem-navbar.png" width="75" height="35"/> <span>Prefeitura de Passagem</span></a>
+                    <ul class="navbar-nav flex-grow-1 d-flex justify-content-evenly" id="itens-navbar">
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-4 bold" href="https://www.alistamento.eb.mil.br/services.action" target="_blank">Alistamento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-4 bold" href="https://portaldoservidor.aspec.com.br/" target="_blank">Contra Cheque</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-4 bold" href="https://falabr.cgu.gov.br/publico/RN/Passagem/Manifestacao/RegistrarManifestacao" target="_blank">Ouvidoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-4 bold" href="https://app.protocolomunicipal.com.br/login?logout" target="_blank">Protocolo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-4 bold" href="http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm" target="_blank">Lei de Acesso</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section>
+        <div>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow py-3">
+                <div class="container-fluid">
+                <a  class="fds" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo-passagem.png" height="50" width="auto" id="logo-passagem"/>
+                </a>
+                <button class="navbar-toggler bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-second" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-light"><i class="bi bi-justify"></i></span>
+                </button>
+                    <div class="collapse navbar-collapse d-sm-inline-flex" id="navbar-collapse-second">
+                        <ul class="navbar-nav flex-grow-1 d-flex justify-content-evenly" id="itens-navbar">
+                            <li class="nav-item">
+                                <a class="nav-link text-success px-4 line-height" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link text-success px-4 line-height dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sobre</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item text-success" href="#">A Cidade</a>
+                                    <a class="dropdown-item text-success" href="#">O Prefeito</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-success px-4 line-height" asp-area="" asp-controller="Home" asp-action="Index">Notícias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-success px-4 line-height" asp-area="" asp-controller="Home" asp-action="FaleConosco">Fale Conosco</a>
+                            </li>
+                            <form method="post" class="d-flex">
+                                <input class="form-control form-control-sm me-sm-2" type="text" placeholder="Pesquisar no site">
+                                <button class="btn btn-sm btn-success my-2 my-sm-1" type="submit"><i class="bi bi-search p-3"></i></button>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted footer-text">
+        <div class="container">
+            <span class="text-light d-flex justify-content-center">Rua Senador Dinarte Mariz, 288 - Centro, Passagem - RN, 59259-000 - Ouvidoria Geral (84) 3286-0029</span>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
