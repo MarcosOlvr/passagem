@@ -1,0 +1,36 @@
+﻿@model Noticias
+
+@{
+    ViewData["Title"] = "Excluir Notícia";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-success">Excluir Notícia</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Id"></label>
+            <input disabled asp-for="Id" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Titulo"></label>
+            <input disabled asp-for="Titulo" class="form-control"/>
+            @*<span asp-validation-for="Name" class="text-danger"></span>*@
+        </div>
+        <div class="mb-3">
+            <label asp-for="Conteudo"></label>
+            <textarea disabled asp-for="Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
+            @*<span asp-validation-for="DisplayOrder" class="text-danger"></span>*@
+        </div>
+        <div class="mb-3">
+            <label asp-for="Categoria"></label>
+            <input disabled asp-for="Categoria" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Excluir</button>
+        <a asp-controller="Noticias" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Voltar para lista
+        </a>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Noticias>
+
+@{
+    ViewData["Title"] = "Notícias";
+}
+
+<div class="container p-3">
+    <h2 class="text-success">Notícias</h2>
+    @foreach (var obj in Model)
+    {
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" id="links-news">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="badge alert-warning mr-1 text-black p-2">@obj.Categoria</span>
+                    </div>
+                    <div class="col-md-2">
+                        <p>@obj.CriadoEm.Day/@obj.CriadoEm.Month/@obj.CriadoEm.Year</p>
+                    </div>
+                    <div class="col text-center">
+                        @obj.Titulo
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

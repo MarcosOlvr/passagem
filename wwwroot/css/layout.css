@@ -16,18 +16,23 @@
     font-weight: 600;
 }
 
-#vtmnc > li {
-    list-style: none;
-}
-
 .line-height{
     line-height: 5vh;
 }
+
 #selecionado {
     border-bottom: 3px solid #02b875;
 }
-.footer-text{
-    font-size: 0.9rem;
-    font-weight: 600;
-    background-color: #02b875;
+
+.footer-text {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 20px;
+    padding: 5px 0px;
+}
+
+#links-news:hover{
+    cursor: pointer;
 }
