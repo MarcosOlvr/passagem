@@ -3,6 +3,7 @@
 .fds {
     padding-left: 50px;
     font-weight: 600;
+    white-space: nowrap;
 }
 .fds > span {
     padding-left: 6px;

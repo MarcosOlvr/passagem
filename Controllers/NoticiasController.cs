@@ -12,6 +12,7 @@ namespace Passagem.Controllers
             {
                 Id = 1,
                 Titulo = "Ginásio Poliesportivo recebe reforma",
+                ResumoMateria = "Não sei oq escrever aqui mas espero que fique legal hahahahahha",
                 Conteudo = "O ginásio Poliesportivo de Passagem/RN, o Luisão, passou por uma reforma recentemente! O que mudou foi " +
                 "as cores do local, tanto na parte externa quanto na interna!",
                 Categoria = "Esporte",
@@ -114,6 +115,21 @@ namespace Passagem.Controllers
         public IActionResult Index()
         {
             return View(news);
+        }
+
+        [HttpGet]
+        public IActionResult Visualizar(int? id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+            
+
+            var obj = news.Find(x => x.Id == id);
+
+            if (obj == null)
+                return NotFound();
+
+            return View(obj);
         }
     }
 }

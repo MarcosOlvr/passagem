@@ -1,0 +1,16 @@
+﻿@model Noticias
+@{
+    ViewData["Title"] = @Model.Titulo;
+}
+
+<div class="container p-3 col-10">
+    <div class="border-bottom py-2">
+        <h1 class="text-success text-center">@Model.Titulo</h1>
+        <p class="h6 pb-3 pt-2">@Model.ResumoMateria</p>
+        <span>@Model.Categoria</span> <br />
+        <span>@Model.CriadoEm</span>
+    </div>
+    <div>
+        <img class="mr-auto" src="~/images/logo-passagem.png" />
+    </div>
+</div>
