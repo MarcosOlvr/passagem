@@ -42,7 +42,7 @@
                     @obj.Id
                 </td>
                 <td>
-                    <a class="nav-link" asp-controller="" asp-action="">@obj.Titulo</a>
+                    <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.Id">@obj.Titulo</a>
                 </td>
                 <td>
                     @obj.Categoria

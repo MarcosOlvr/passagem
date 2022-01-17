@@ -20,6 +20,10 @@
             @*<span asp-validation-for="Name" class="text-danger"></span>*@
         </div>
         <div class="mb-3">
+            <label asp-for="ResumoMateria"></label>
+            <input asp-for="ResumoMateria" class="form-control"/>
+        </div>
+        <div class="mb-3">
             <label asp-for="Conteudo"></label>
             <textarea asp-for="Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
             @*<span asp-validation-for="DisplayOrder" class="text-danger"></span>*@
@@ -28,9 +32,28 @@
             <label asp-for="Categoria"></label>
             <input asp-for="Categoria" class="form-control"/>
         </div>
-        <button type="submit" class="btn btn-success" style="width:150px">Criar</button>
-        <a asp-controller="Noticias" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        <button type="button" class="btn btn-success" style="width:150px" data-bs-toggle="modal" data-bs-target="#ExemploModalCentralizado">Criar</button>
+        <a asp-controller="Noticias" asp-action="News" class="btn btn-secondary" style="width:150px">
             Voltar para lista
         </a>
+        <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="TituloModalCentralizado">Confirmação</h5>
+                        <button type="button" class="close btn btn-secondary text-danger" data-bs-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Deseja salvar a nova notícia?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>

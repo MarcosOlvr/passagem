@@ -4,13 +4,29 @@
 }
 
 <div class="container p-3 col-10">
-    <div class="border-bottom py-2">
-        <h1 class="text-success text-center">@Model.Titulo</h1>
-        <p class="h6 pb-3 pt-2">@Model.ResumoMateria</p>
-        <span>@Model.Categoria</span> <br />
+    <div class="border-bottom pb-3">
+        <h1 class="text-success">@Model.Titulo</h1>
+        <p class="pt-2 text-muted">@Model.ResumoMateria</p>
+        <span class="bold">@Model.Categoria</span> <br />
         <span>@Model.CriadoEm</span>
     </div>
-    <div>
-        <img class="mr-auto" src="~/images/logo-passagem.png" />
+    <div class="text-center p-3">
+        <img src="~/images/logo-passagem.png" />
+        <span class="d-block text-start text-muted">Descrição da imagem</span>
+    </div>
+    <div class="border-bottom pb-3 text-break">
+        @Model.Conteudo
+    </div>
+    <div class="list-group mt-4" id="list-news">
+            <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" id="links-news">
+                <div class="row">
+                    <div class="col-md-2">
+                        <p>Data aqui</p>
+                    </div>     
+                    <div class="col">
+                        <h6 class="text-success">Titulo aqui</h6>
+                    </div>
+                </div>
+            </a>
     </div>
 </div>
