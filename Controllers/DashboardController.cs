@@ -5,7 +5,7 @@ namespace Passagem.Controllers
 {
     public class DashboardController : Controller
     {
-        private static List<Noticias> news = new List<Noticias>
+        public static List<Noticias> news = new List<Noticias>
         {
             new Noticias
             {
@@ -20,19 +20,19 @@ namespace Passagem.Controllers
             }
         };
 
-        // GET: NoticiasController
+        // GET: DashboardController
         public IActionResult News()
         {
             return View(news);
         }
 
-        // GET: NoticiasController/Create
+        // GET: DashboardController/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: NoticiasController/Create
+        // POST: DashboardController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Noticias obj)
@@ -40,13 +40,16 @@ namespace Passagem.Controllers
             if (ModelState.IsValid)
             {
                 news.Add(obj);
+                TempData["success"] = "Notícia criada com sucesso!";
+
                 return RedirectToAction("News");
             }
 
             return View(obj);
         }
 
-        // GET: NoticiasController/Edit/5
+        // GET: DashboardController/Edit/5
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -59,7 +62,7 @@ namespace Passagem.Controllers
             return View(objNews);
         }
 
-        // POST: NoticiasController/Edit/5
+        // POST: DashboardController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Noticias obj, int? id)
@@ -76,15 +79,18 @@ namespace Passagem.Controllers
                 objNews.Conteudo = obj.Conteudo;
                 objNews.Categoria = obj.Categoria;
                 objNews.CriadoEm = objNews.CriadoEm;
-                obj.AtualizadoEm = DateTime.Now;
+                objNews.AtualizadoEm = DateTime.Now;
+                objNews.ResumoMateria = obj.ResumoMateria;
 
-                return RedirectToAction("Index");
+                TempData["success"] = "Notícia editada com sucesso!";
+
+                return RedirectToAction("News");
             }
 
             return View(obj);
         }
 
-        // GET: NoticiasController/Delete/5
+        // GET: DashboardController/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -97,7 +103,7 @@ namespace Passagem.Controllers
             return View(objNews);
         }
 
-        // POST: NoticiasController/Delete/5
+        // POST: DashboardController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -107,10 +113,19 @@ namespace Passagem.Controllers
                 return NotFound();
 
             news.Remove(obj);
+
+            TempData["success"] = "Notícia deletada com sucesso!";
+
             return RedirectToAction("News");
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("Dashboard/Passagem/Login")]
+        public IActionResult Login()
         {
             return View();
         }
