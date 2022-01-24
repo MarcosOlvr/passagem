@@ -7,11 +7,12 @@ namespace Passagem.Models
         public int Id { get; set; }
         
         [Required]
-        public string Nome { get; set; }
+        public string NomeAutor { get; set; }
         
         [Required]
         public string Email { get; set; }
 
+        [Required]
         public string Assunto { get; set; }
 
         [Required]

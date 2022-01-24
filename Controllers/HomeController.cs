@@ -24,18 +24,7 @@ namespace Passagem.Controllers
             return View();
         }
 
-        public static List<FaleConosco> mensagens = new List<FaleConosco>
-        {
-            new FaleConosco
-            {
-                Id = 1,
-                Nome = "Agostinho Carrara Taxi",
-                Email = "agostinhocarrara@taxi.com",
-                Assunto = "Frete",
-                Mensagem = "Gostaria de saber se tem como cês fretar meu táxi, preciso ganhar dinheiro, tmj crias",
-                CriadoEm = DateTime.Now,
-            }
-        };
+        public static List<FaleConosco> mensagens = new List<FaleConosco>();
 
         [HttpPost]
         public IActionResult FaleConosco(FaleConosco obj)

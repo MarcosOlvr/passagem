@@ -129,5 +129,80 @@ namespace Passagem.Controllers
         {
             return View();
         }
+
+        public static List<FaleConosco> mensagens = new List<FaleConosco>
+        {
+            new FaleConosco
+            {
+                Id = 1,
+                NomeAutor = "Agostinho Carrara Taxi",
+                Email = "agostinhocarrara@taxi.com",
+                Assunto = "Frete",
+                Mensagem = "Gostaria de saber se tem como cês fretar meu táxi, preciso ganhar dinheiro, tmj crias",
+                CriadoEm = DateTime.Now,
+            },
+            new FaleConosco
+            {
+                Id = 2,
+                NomeAutor = "Harry Porra",
+                Email = "harryporra@bruxo.com",
+                Assunto = "Clipe da minha música",
+                Mensagem = "Gostaria de utilizar do campo de futebol de sua cidade para gravar meu novo lançamento musical, se possivel, sem pagar nenhum centavo!",
+                CriadoEm = DateTime.Now,
+            },
+            new FaleConosco
+            {
+                Id = 3,
+                NomeAutor = "Teste",
+                Email = "teste@teste.com",
+                Assunto = "Sei la porra",
+                Mensagem = "Acabou a criativade foi mal não sei oq colocar",
+                CriadoEm = DateTime.Now,
+            },
+            new FaleConosco
+            {
+                Id = 4,
+                NomeAutor = "Eu mesmo",
+                Email = "eu@eu.com",
+                Assunto = "Quero um emprego",
+                Mensagem = "Alguém me arruma um emprego, preciso ganhar dinheiro pra comprar minhas coisas, AAAA QUERIA IR JOGAR BOLAAAAAAAAAAAAA",
+                CriadoEm = DateTime.Now,
+            }
+        };
+
+        [HttpGet]
+        public IActionResult Emails()
+        {
+            return View(mensagens);
+        }
+
+        public IActionResult VisualizarEmail(int? id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+
+            var obj = mensagens.Find(x => x.Id == id);
+            if (obj == null)
+                return NotFound();
+
+            return View(obj);
+        }
+
+        public IActionResult DeleteEmail(int? id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+
+            var obj = mensagens.Find(x => x.Id == id);
+
+            if (obj == null)
+                return NotFound();
+
+            mensagens.Remove(obj);
+
+            TempData["success"] = "Mensagem deletada com sucesso!";
+
+            return RedirectToAction("Emails");
+        }
     }
 }
