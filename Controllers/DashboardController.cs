@@ -1,28 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Passagem.Data;
 using Passagem.Models;
 
 namespace Passagem.Controllers
 {
     public class DashboardController : Controller
     {
-        public static List<Noticias> news = new List<Noticias>
+        private readonly AppDbContext _db;
+
+        public DashboardController(AppDbContext db)
         {
-            new Noticias
-            {
-                Id = 1,
-                Titulo = "Ginásio Poliesportivo recebe reforma",
-                ResumoMateria = "Não sei oq escrever aqui mas espero que fique legal hahahahahha",
-                Conteudo = "O ginásio Poliesportivo de Passagem/RN, o Luisão, passou por uma reforma recentemente! O que mudou foi " +
-                "as cores do local, tanto na parte externa quanto na interna!",
-                Categoria = "Esporte",
-                CriadoEm = DateTime.Now,
-                AtualizadoEm = DateTime.Now
-            }
-        };
+            _db = db;
+        }
 
         // GET: DashboardController
         public IActionResult News()
         {
+            var news = _db.Noticias.ToList();
             return View(news);
         }
 
@@ -39,7 +34,8 @@ namespace Passagem.Controllers
         {
             if (ModelState.IsValid)
             {
-                news.Add(obj);
+                _db.Noticias.Add(obj);
+                _db.SaveChanges();
                 TempData["success"] = "Notícia criada com sucesso!";
 
                 return RedirectToAction("News");
@@ -55,7 +51,8 @@ namespace Passagem.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-            var objNews = news.Find(x => x.Id == id);
+            var objNews = _db.Noticias.Find(id);
+            
             if (objNews == null)
                 return NotFound();
 
@@ -65,22 +62,12 @@ namespace Passagem.Controllers
         // POST: DashboardController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Noticias obj, int? id)
+        public IActionResult Edit(Noticias obj)
         {
-            if (id == null || id == 0)
-                return NotFound();
-
-            var objNews = news.Find(x => x.Id == id);
-
             if (ModelState.IsValid)
             {
-                objNews.Id = obj.Id;
-                objNews.Titulo = obj.Titulo;
-                objNews.Conteudo = obj.Conteudo;
-                objNews.Categoria = obj.Categoria;
-                objNews.CriadoEm = objNews.CriadoEm;
-                objNews.AtualizadoEm = DateTime.Now;
-                objNews.ResumoMateria = obj.ResumoMateria;
+                _db.Noticias.Update(obj);
+                _db.SaveChanges();
 
                 TempData["success"] = "Notícia editada com sucesso!";
 
@@ -96,7 +83,7 @@ namespace Passagem.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-            var objNews = news.Find(x => x.Id == id);
+            var objNews = _db.Noticias.Find(id);
             if (objNews == null)
                 return NotFound();
 
@@ -108,11 +95,12 @@ namespace Passagem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var obj = news.Find(x => x.Id == id);
+            var obj = _db.Noticias.Find(id);
             if (obj == null)
                 return NotFound();
 
-            news.Remove(obj);
+            _db.Noticias.Remove(obj);
+            _db.SaveChanges();
 
             TempData["success"] = "Notícia deletada com sucesso!";
 
@@ -129,76 +117,41 @@ namespace Passagem.Controllers
         {
             return View();
         }
-        
-        public static List<FaleConosco> mensagens = new List<FaleConosco>
-        {
-            new FaleConosco
-            {
-                Id = 1,
-                NomeAutor = "Agostinho Carrara Taxi",
-                Email = "agostinhocarrara@taxi.com",
-                Assunto = "Frete",
-                Mensagem = "Gostaria de saber se tem como cês fretar meu táxi, preciso ganhar dinheiro, tmj crias",
-                CriadoEm = DateTime.Now,
-            },
-            new FaleConosco
-            {
-                Id = 2,
-                NomeAutor = "Harry Porra",
-                Email = "harryporra@bruxo.com",
-                Assunto = "Clipe da minha música",
-                Mensagem = "Gostaria de utilizar do campo de futebol de sua cidade para gravar meu novo lançamento musical, se possivel, sem pagar nenhum centavo!",
-                CriadoEm = DateTime.Now,
-            },
-            new FaleConosco
-            {
-                Id = 3,
-                NomeAutor = "Teste",
-                Email = "teste@teste.com",
-                Assunto = "Sei la porra",
-                Mensagem = "Acabou a criativade foi mal não sei oq colocar",
-                CriadoEm = DateTime.Now,
-            },
-            new FaleConosco
-            {
-                Id = 4,
-                NomeAutor = "Eu mesmo",
-                Email = "eu@eu.com",
-                Assunto = "Quero um emprego",
-                Mensagem = "Alguém me arruma um emprego, preciso ganhar dinheiro pra comprar minhas coisas, AAAA QUERIA IR JOGAR BOLAAAAAAAAAAAAA",
-                CriadoEm = DateTime.Now,
-            }
-        };
 
         [HttpGet]
         public IActionResult Emails()
         {
+            var mensagens = _db.Emails.ToList();
             return View(mensagens);
         }
 
+        [HttpGet]
         public IActionResult VisualizarEmail(int? id)
         {
             if (id == null || id == 0)
                 return NotFound();
 
-            var obj = mensagens.Find(x => x.Id == id);
+            var obj = _db.Emails.Find(id);
             if (obj == null)
                 return NotFound();
 
             return View(obj);
         }
 
+        [HttpPost]
+        [Route("Dashboard/VisualizarEmail/{id}")]
         public IActionResult DeleteEmail(int? id)
         {
             if (id == null || id == 0)
                 return NotFound();
 
-            var obj = mensagens.Find(x => x.Id == id);
+            var obj = _db.Emails.Find(id);
 
             if (obj == null)
                 return NotFound();
 
-            mensagens.Remove(obj);
+            _db.Emails.Remove(obj);
+            _db.SaveChanges();
 
             TempData["success"] = "Mensagem deletada com sucesso!";
 

@@ -12,10 +12,6 @@
             <hr />
         </div>
         <div class="mb-3">
-            <label asp-for="Id"></label>
-            <input asp-for="Id" class="form-control"/>
-        </div>
-        <div class="mb-3">
             <label asp-for="Titulo"></label>
             <input asp-for="Titulo" class="form-control"/>
             @*<span asp-validation-for="Name" class="text-danger"></span>*@
@@ -31,7 +27,9 @@
         </div>
         <div class="mb-3">
             <label asp-for="Categoria"></label>
-            <input asp-for="Categoria" class="form-control"/>
+             <select asp-for="Categoria" class="form-control">
+                <option>Please select one</option>
+            </select>
         </div>
         <button type="button" class="btn btn-primary" style="width:150px" data-toggle="modal" data-target="#ExemploModalCentralizado">Criar</button>
         <a asp-controller="Dashboard" asp-action="News" class="btn btn-secondary" style="width:150px">

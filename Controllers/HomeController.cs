@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Passagem.Data;
 using Passagem.Models;
 using System.Diagnostics;
 
 namespace Passagem.Controllers
 {
-        public class HomeController : Controller
-        {
-        private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly AppDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -24,14 +25,14 @@ namespace Passagem.Controllers
             return View();
         }
 
-        public static List<FaleConosco> mensagens = new List<FaleConosco>();
-
         [HttpPost]
         public IActionResult FaleConosco(FaleConosco obj)
         {
             if (ModelState.IsValid)
             {
-                mensagens.Add(obj);
+                _db.Emails.Add(obj);
+                _db.SaveChanges();
+
                 TempData["success"] = "Mensagem enviada com sucesso!";
 
                 return RedirectToAction("FaleConosco");

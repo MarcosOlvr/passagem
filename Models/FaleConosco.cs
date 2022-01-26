@@ -1,12 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Passagem.Models
 {
     public class FaleConosco
     {
+        [Key]
         public int Id { get; set; }
         
         [Required]
+        [DisplayName("Nome")]
         public string NomeAutor { get; set; }
         
         [Required]

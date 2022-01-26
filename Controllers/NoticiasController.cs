@@ -1,29 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Passagem.Data;
 using Passagem.Models;
 
 namespace Passagem.Controllers
 {
     public class NoticiasController : Controller
     {
-        private static List<Noticias> news = new List<Noticias>
+        private readonly AppDbContext _db;
+
+        public NoticiasController(AppDbContext db)
         {
-            new Noticias
-            {
-                Id = 1,
-                Titulo = "Ginásio Poliesportivo recebe reforma",
-                ResumoMateria = "Não sei oq escrever aqui mas espero que fique legal hahahahahha",
-                Conteudo = "O ginásio Poliesportivo de Passagem/RN, o Luisão, passou por uma reforma recentemente! O que mudou foi " +
-                "as cores do local, tanto na parte externa quanto na interna!",
-                Categoria = "Esporte",
-                CriadoEm = DateTime.Now,
-                AtualizadoEm = DateTime.Now
-            }
-        };
+            _db = db;
+        }
 
         [HttpGet]
         public IActionResult Index()
         {
+            var news = _db.Noticias.ToList();
             return View(news);
         }
 
@@ -34,7 +28,7 @@ namespace Passagem.Controllers
                 return NotFound();
             
 
-            var obj = news.Find(x => x.Id == id);
+            var obj = _db.Noticias.Find(id);
 
             if (obj == null)
                 return NotFound();
