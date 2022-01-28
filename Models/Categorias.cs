@@ -7,6 +7,6 @@ namespace Passagem.Models
         [Key]
         public int Id { get; set; }
         public string Categoria { get; set; }
-        public virtual ICollection<Noticias> Noticias { get; set; }
+        public virtual List<Noticias> Noticias { get; set; }
     }
 }

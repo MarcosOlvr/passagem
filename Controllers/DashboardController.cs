@@ -24,17 +24,20 @@ namespace Passagem.Controllers
         // GET: DashboardController/Create
         public IActionResult Create()
         {
-            return View();
+            var vm = new NewsViewModel();
+            vm.Categorias = _db.Categorias.ToList();
+
+            return View(vm);
         }
 
         // POST: DashboardController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Noticias obj)
+        public IActionResult Create(NewsViewModel obj)
         {
             if (ModelState.IsValid)
             {
-                _db.Noticias.Add(obj);
+                _db.Noticias.Add(obj.Noticias);
                 _db.SaveChanges();
                 TempData["success"] = "Notícia criada com sucesso!";
 

@@ -1,4 +1,4 @@
-﻿@model Noticias
+﻿@model NewsViewModel
 
 @{
     ViewData["Title"] = "Criar Notícia";
@@ -6,29 +6,33 @@
 }
 
 <form method="post">
-    <div class="border p-3 mt-4">
+    <div class="p-3">
         <div class="row pb-2">
             <h2 class="text-success">Criar Notícia</h2>
             <hr />
         </div>
         <div class="mb-3">
-            <label asp-for="Titulo"></label>
-            <input asp-for="Titulo" class="form-control"/>
+            <label asp-for="@Model.Noticias.Titulo"></label>
+            <input asp-for="@Model.Noticias.Titulo" class="form-control"/>
             @*<span asp-validation-for="Name" class="text-danger"></span>*@
         </div>
         <div class="mb-3">
-            <label asp-for="ResumoMateria"></label>
-            <input asp-for="ResumoMateria" class="form-control"/>
+            <label asp-for="@Model.Noticias.ResumoMateria"></label>
+            <input asp-for="@Model.Noticias.ResumoMateria" class="form-control"/>
         </div>
         <div class="mb-3">
-            <label asp-for="Conteudo"></label>
-            <textarea asp-for="Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
+            <label asp-for="@Model.Noticias.Conteudo"></label>
+            <textarea asp-for="@Model.Noticias.Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
             @*<span asp-validation-for="DisplayOrder" class="text-danger"></span>*@
         </div>
         <div class="mb-3">
-            <label asp-for="Categoria"></label>
-             <select asp-for="Categoria" class="form-control">
-                <option>Please select one</option>
+            <label asp-for="Noticias.Categoria"></label>
+             <select class="form-control" asp-for="Noticias.CategoriaForeignKey">
+                <option value="" disabled selected>Selecione uma categoria</option>
+                @foreach (var obj in Model.Categorias)
+                {
+                    <option value="@obj.Id">@obj.Categoria</option>
+                }
             </select>
         </div>
         <button type="button" class="btn btn-primary" style="width:150px" data-toggle="modal" data-target="#ExemploModalCentralizado">Criar</button>

@@ -18,7 +18,9 @@ namespace Passagem.Models
         [Column(TypeName = "ntext")]
         public string Conteudo { get; set; }
 
+        public int CategoriaForeignKey { get; set; }
         [Required]
+        [ForeignKey("CategoriaForeignKey")]
         public virtual Categorias Categoria { get; set; }
 
         public DateTime CriadoEm { get; set; } = DateTime.Now;

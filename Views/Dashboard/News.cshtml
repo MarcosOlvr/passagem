@@ -58,7 +58,7 @@
                                     <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.Id">@obj.Titulo</a>
                                 </td>
                                 <td>@obj.CriadoEm</td>
-                                <td>@obj.Categoria</td>
+                                <td>@obj.CategoriaForeignKey</td>
                                 <td class="text-center">
                                     <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">
                                         <i class="bi bi-pencil-square"></i> Editar
