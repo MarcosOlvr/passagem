@@ -17,15 +17,18 @@ namespace Passagem.Controllers
         // GET: DashboardController
         public IActionResult News()
         {
-            var news = _db.Noticias.ToList();
-            return View(news);
+            var vm = new NewsIndexViewModel();
+            vm.ListaCategoria = _db.Categorias.ToList();
+            vm.ListaNoticias = _db.Noticias.ToList();
+
+            return View(vm);
         }
 
         // GET: DashboardController/Create
         public IActionResult Create()
         {
-            var vm = new NewsViewModel();
-            vm.Categorias = _db.Categorias.ToList();
+            var vm = new NewsViewModel();            
+            vm.ListaCategoria = _db.Categorias.ToList();
 
             return View(vm);
         }
@@ -35,6 +38,13 @@ namespace Passagem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(NewsViewModel obj)
         {
+            ModelState.Remove("Noticias.Categoria");
+
+            var categoriaById = _db.Categorias.Find(obj.Noticias.CategoriaFK);
+
+            if (categoriaById != null)
+                obj.Noticias.Categoria = categoriaById;
+
             if (ModelState.IsValid)
             {
                 _db.Noticias.Add(obj.Noticias);
@@ -54,22 +64,34 @@ namespace Passagem.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
+            var vm = new NewsViewModel();
+            vm.ListaCategoria = _db.Categorias.ToList();
+
             var objNews = _db.Noticias.Find(id);
             
             if (objNews == null)
                 return NotFound();
 
-            return View(objNews);
+            vm.Noticias = objNews;
+
+            return View(vm);
         }
 
         // POST: DashboardController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Noticias obj)
+        public IActionResult Edit(NewsViewModel obj)
         {
+            ModelState.Remove("Noticias.Categoria");
+
+            var categoriaById = _db.Categorias.Find(obj.Noticias.CategoriaFK);
+
+            if (categoriaById != null)
+                obj.Noticias.Categoria = categoriaById;
+
             if (ModelState.IsValid)
             {
-                _db.Noticias.Update(obj);
+                _db.Noticias.Update(obj.Noticias);
                 _db.SaveChanges();
 
                 TempData["success"] = "Notícia editada com sucesso!";

@@ -6,7 +6,7 @@ namespace Passagem.Models
     public class Noticias
     {
         [Key]
-        public int Id { get; set; }
+        public int NoticiaId { get; set; }
 
         [Required]
         public string Titulo { get; set; }
@@ -18,9 +18,9 @@ namespace Passagem.Models
         [Column(TypeName = "ntext")]
         public string Conteudo { get; set; }
 
-        public int CategoriaForeignKey { get; set; }
-        [Required]
-        [ForeignKey("CategoriaForeignKey")]
+        [ForeignKey("Categoria")]
+        public int CategoriaFK { get; set; }
+        
         public virtual Categorias Categoria { get; set; }
 
         public DateTime CriadoEm { get; set; } = DateTime.Now;

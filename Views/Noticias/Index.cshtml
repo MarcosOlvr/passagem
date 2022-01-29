@@ -9,7 +9,7 @@
     @foreach (var obj in Model)
     {
         <div class="list-group m-0" id="list-news">
-            <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.Id" id="links-news">
+            <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId" id="links-news">
                 <div class="row">
                     <div class="col-md-3">
                         <img src="~/images/logo-passagem-navbar.png">

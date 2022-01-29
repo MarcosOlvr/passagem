@@ -5,8 +5,8 @@ namespace Passagem.Models
     public class Cargos
     {
         [Key]
-        public int Id { get; set; }
-        public string Cargo { get; set; }
+        public int CargoId { get; set; }
+        public string CargoNome { get; set; }
         public virtual ICollection<User> Usuario { get; set; }
     }
 }

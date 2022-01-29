@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Noticias>
+﻿@model NewsIndexViewModel
 
 @{
     ViewData["Title"] = "Dashboard - Notícias";
@@ -35,6 +35,7 @@
                             <th>Título</th>
                             <th>Publicado em</th>
                             <th>Categoria</th>
+                            <th>Autor</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -45,27 +46,35 @@
                             <th>Título</th>
                             <th>Publicado em</th>
                             <th>Categoria</th>
+                            <th>Autor</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var obj in Model)
+                        @foreach (var obj in Model.ListaNoticias)
                         {
                             <tr>
-                                <td>@obj.Id</td>
+                                <td>@obj.NoticiaId</td>
                                 <td>
-                                    <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.Id">@obj.Titulo</a>
+                                    <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId">@obj.Titulo</a>
                                 </td>
                                 <td>@obj.CriadoEm</td>
-                                <td>@obj.CategoriaForeignKey</td>
+                                @foreach (var categoria in Model.ListaCategoria)
+                                {
+                                    if (categoria.CategoriaId == obj.CategoriaFK)
+                                    {
+                                        <td>@categoria.CategoriaNome</td>
+                                    }
+                                }
+                                <td>Eu</td>
                                 <td class="text-center">
-                                    <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">
+                                    <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.NoticiaId" class="btn btn-primary">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <a asp-controller="Dashboard" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">
+                                    <a asp-controller="Dashboard" asp-action="Delete" asp-route-id="@obj.NoticiaId" class="btn btn-danger">
                                         <i class="bi bi-trash"></i> Excluir
                                     </a>
                                 </td> 

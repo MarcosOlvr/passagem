@@ -5,58 +5,61 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<form method="post">
-    <div class="p-3">
-        <div class="row pb-2">
-            <h2 class="text-success">Criar Notícia</h2>
-            <hr />
-        </div>
-        <div class="mb-3">
-            <label asp-for="@Model.Noticias.Titulo"></label>
-            <input asp-for="@Model.Noticias.Titulo" class="form-control"/>
-            @*<span asp-validation-for="Name" class="text-danger"></span>*@
-        </div>
-        <div class="mb-3">
-            <label asp-for="@Model.Noticias.ResumoMateria"></label>
-            <input asp-for="@Model.Noticias.ResumoMateria" class="form-control"/>
-        </div>
-        <div class="mb-3">
-            <label asp-for="@Model.Noticias.Conteudo"></label>
-            <textarea asp-for="@Model.Noticias.Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
-            @*<span asp-validation-for="DisplayOrder" class="text-danger"></span>*@
-        </div>
-        <div class="mb-3">
-            <label asp-for="Noticias.Categoria"></label>
-             <select class="form-control" asp-for="Noticias.CategoriaForeignKey">
-                <option value="" disabled selected>Selecione uma categoria</option>
-                @foreach (var obj in Model.Categorias)
-                {
-                    <option value="@obj.Id">@obj.Categoria</option>
-                }
-            </select>
-        </div>
-        <button type="button" class="btn btn-primary" style="width:150px" data-toggle="modal" data-target="#ExemploModalCentralizado">Criar</button>
-        <a asp-controller="Dashboard" asp-action="News" class="btn btn-secondary" style="width:150px">
-            Voltar para lista
-        </a>
-        <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="TituloModalCentralizado">Confirmação</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Deseja salvar a nova notícia?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+<div class="container-fluid">
+    <form method="post">
+        @Html.HiddenFor(model => model.ListaCategoria)
+        <div class="mb-4">
+            <div class="row pb-2 pl-2">
+                <h1 class="h3 mb-2 text-gray-800">Criar Notícia</h1>
+                <hr />
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Noticias.Titulo">Título</label>
+                <input asp-for="@Model.Noticias.Titulo" class="form-control"/>
+                @*<span asp-validation-for="Name" class="text-danger"></span>*@
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Noticias.ResumoMateria">Resumo da Matéria</label>
+                <input asp-for="@Model.Noticias.ResumoMateria" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Noticias.Conteudo">Conteúdo</label>
+                <textarea asp-for="@Model.Noticias.Conteudo" class="form-control" cols="40" rows="10" style="resize: none;"></textarea>
+                @*<span asp-validation-for="DisplayOrder" class="text-danger"></span>*@
+            </div>
+            <div class="mb-3">
+                <label asp-for="Noticias.CategoriaFK">Categoria</label>
+                 <select class="form-control" asp-for="Noticias.CategoriaFK">
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    @foreach (var obj in Model.ListaCategoria)
+                    {
+                        <option value="@obj.CategoriaId">@obj.CategoriaNome</option>
+                    }
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:150px" data-toggle="modal" data-target="#ExemploModalCentralizado">Criar</button>
+            <a asp-controller="Dashboard" asp-action="News" class="btn btn-secondary" style="width:150px">
+                Voltar para lista
+            </a>
+            <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TituloModalCentralizado">Confirmação</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja salvar a nova notícia?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

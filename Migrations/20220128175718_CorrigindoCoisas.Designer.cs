@@ -12,8 +12,8 @@ using Passagem.Data;
 namespace Passagem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220126181436_AtualizandoBanco")]
-    partial class AtualizandoBanco
+    [Migration("20220128175718_CorrigindoCoisas")]
+    partial class CorrigindoCoisas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,7 +101,7 @@ namespace Passagem.Migrations
                     b.Property<DateTime>("AtualizadoEm")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int>("CategoriaFK")
                         .HasColumnType("int");
 
                     b.Property<string>("Conteudo")
@@ -121,7 +121,7 @@ namespace Passagem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriaId");
+                    b.HasIndex("CategoriaFK");
 
                     b.ToTable("Noticias");
                 });
@@ -160,7 +160,7 @@ namespace Passagem.Migrations
                 {
                     b.HasOne("Passagem.Models.Categorias", "Categoria")
                         .WithMany("Noticias")
-                        .HasForeignKey("CategoriaId")
+                        .HasForeignKey("CategoriaFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

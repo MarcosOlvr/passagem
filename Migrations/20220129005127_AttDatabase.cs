@@ -4,7 +4,7 @@
 
 namespace Passagem.Migrations
 {
-    public partial class AtualizandoBanco : Migration
+    public partial class AttDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
