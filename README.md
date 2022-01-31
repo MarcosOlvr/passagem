@@ -1,6 +1,6 @@
 # Passagem / RN - Site
 ## Sobre o Projeto
-Esse projeto foi desenvolvido no intuito de melhorar o site da minha cidade, apenas para fins educativos.
+Esse projeto foi desenvolvido no intuito de melhorar o site da minha cidade, apenas para colocar minhas habilidades em prática.
 
 As tecnologias usadas no desenvolvimento foram:
 * **C#** (_.NET_)
