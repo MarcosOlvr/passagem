@@ -17,7 +17,11 @@ namespace Passagem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vm = new DashboardIndexViewModel();
+            vm.Noticias = _db.Noticias.ToList();
+            vm.Emails = _db.Emails.ToList();
+
+            return View(vm);
         }
 
         // GET: DashboardController
