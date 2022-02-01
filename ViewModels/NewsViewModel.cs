@@ -1,4 +1,6 @@
-﻿namespace Passagem.Models
+﻿using Passagem.Models;
+
+namespace Passagem.ViewModels
 {
     public class NewsViewModel
     {
