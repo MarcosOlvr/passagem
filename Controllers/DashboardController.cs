@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Passagem.Data;
 using Passagem.Models;
@@ -6,6 +7,7 @@ using Passagem.ViewModels;
 
 namespace Passagem.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly AppDbContext _db;
@@ -182,6 +184,7 @@ namespace Passagem.Controllers
             return RedirectToAction("Emails");
         }
 
+        [HttpGet]
         [Route("Dashboard/Passagem/Login")]
         public IActionResult Login()
         {
