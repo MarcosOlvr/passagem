@@ -12,8 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
 builder.Services.AddDbContext<PassagemContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PassagemContextConnection")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<PassagemContext>();builder.Services.AddDbContext<PassagemContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PassagemContextConnection")));
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<PassagemContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +28,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

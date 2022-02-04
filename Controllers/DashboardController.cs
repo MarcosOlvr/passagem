@@ -276,6 +276,7 @@ namespace Passagem.Controllers
             return View(obj);
         }
 
+        [Authorize(Roles ="Admin")]
         public IActionResult DeleteUser(int? id)
         {
             if (id == null || id == 0)
@@ -291,6 +292,7 @@ namespace Passagem.Controllers
             return View(objUser);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteUser(int id)
