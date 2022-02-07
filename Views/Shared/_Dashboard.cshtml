@@ -92,7 +92,7 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Usuários:</h6>
-                        <a class="collapse-item" asp-controller="Dashboard" asp-action="CreateUser">Criar Usuário</a>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Register">Criar Usuário</a>
                         <a class="collapse-item" asp-controller="Dashboard" asp-action="Users">Visualizar Usuários</a>
                     </div>
                 </div>
@@ -366,6 +366,8 @@
             </div>
         </div>
     </div>
+    
+    @RenderSection("scripts", required: false)
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
