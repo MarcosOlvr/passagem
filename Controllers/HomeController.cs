@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Passagem.Data;
 using Passagem.Models;
+using Passagem.ViewModels;
 using System.Diagnostics;
 
 namespace Passagem.Controllers
@@ -16,7 +17,11 @@ namespace Passagem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vm = new HomeIndexViewModel();
+            vm.ListaNoticias = _db.Noticias.ToList();
+            vm.UltimaNoticia = _db.Noticias.OrderBy(x=> x.NoticiaId).LastOrDefault();
+
+            return View(vm);
         }
 
         [HttpGet]
