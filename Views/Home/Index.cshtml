@@ -7,26 +7,13 @@
 <div class="container m-3">
     <div class="col-lg-4 p-0">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            @foreach (var obj in Model.ListaNoticias.TakeLast(3).Reverse())
-            {
-                if (obj.NoticiaId == Model.UltimaNoticia.NoticiaId)
-                {
-                    <li data-target="#carouselExampleIndicators" data-slide-to="@obj.NoticiaId" class="active"></li>
-                }
-                else
-                {
-                    <li data-target="#carouselExampleIndicators" data-slide-to="@obj.NoticiaId"></li>
-                }
-            }
-        </ol>
         <div class="carousel-inner">
             @foreach (var obj in Model.ListaNoticias.TakeLast(3).Reverse())
             {
                 if (obj.NoticiaId == Model.UltimaNoticia.NoticiaId)
                 {
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
+                        <img class="d-block w-100 h-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
                         <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50">
                             <h5>@obj.Titulo</h5>
                             <p>@obj.ResumoMateria</p>

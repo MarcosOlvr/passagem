@@ -27,6 +27,7 @@ namespace Passagem.Controllers
         }
 
         // GET: DashboardController
+        [HttpGet]
         public IActionResult News()
         {
             var vm = new NewsIndexViewModel();
@@ -114,21 +115,9 @@ namespace Passagem.Controllers
             return View(obj);
         }
 
-        // GET: DashboardController/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-                return View("Page404");
-
-            var objNews = _db.Noticias.Find(id);
-            if (objNews == null)
-                return View("Page404");
-
-            return View(objNews);
-        }
-
         // POST: DashboardController/Delete/5
         [HttpPost]
+        [Route("Dashboard/News/{id}")]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
@@ -165,6 +154,7 @@ namespace Passagem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Dashboard/VisualizarEmail/{id}")]
         public IActionResult DeleteEmail(int? id)
         {

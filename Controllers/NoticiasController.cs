@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Passagem.Data;
 using Passagem.Models;
+using Passagem.ViewModels;
 
 namespace Passagem.Controllers
 {
@@ -24,16 +25,21 @@ namespace Passagem.Controllers
         [HttpGet]
         public IActionResult Visualizar(int? id)
         {
+            var vm = new VisualizarNoticiasViewModel();
+
             if (id == null || id == 0)
                 return NotFound();
             
 
-            var obj = _db.Noticias.Find(id);
+            vm.Noticia = _db.Noticias.Find(id);
 
-            if (obj == null)
+            if (vm.Noticia == null)
                 return NotFound();
 
-            return View(obj);
+            vm.ListaNoticias = _db.Noticias.ToList();
+            vm.ListaCategorias = _db.Categorias.ToList();
+
+            return View(vm);
         }
     }
 }
