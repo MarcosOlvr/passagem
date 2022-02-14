@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Passagem.Data;
+using Passagem.Data.FileManager;
 using Passagem.Models;
 using Passagem.ViewModels;
 
@@ -11,10 +12,12 @@ namespace Passagem.Controllers
     public class DashboardController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly IFileManager _fileManager;
 
-        public DashboardController(AppDbContext db)
+        public DashboardController(AppDbContext db, IFileManager fileManager)
         {
             _db = db;
+            _fileManager = fileManager;
         }
 
         public IActionResult Index()
@@ -93,14 +96,18 @@ namespace Passagem.Controllers
         // POST: DashboardController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(NewsViewModel obj)
+        public async Task<IActionResult> Edit(NewsViewModel obj)
         {
             ModelState.Remove("Noticias.Categoria");
+            ModelState.Remove("Noticias.Imagem");
 
             var categoriaById = _db.Categorias.Find(obj.Noticias.CategoriaFK);
 
             if (categoriaById != null)
                 obj.Noticias.Categoria = categoriaById;
+
+            if (obj.Imagem != null)
+                obj.Noticias.Imagem = await _fileManager.SaveImage(obj.Imagem);
 
             if (ModelState.IsValid)
             {

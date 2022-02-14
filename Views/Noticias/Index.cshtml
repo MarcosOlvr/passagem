@@ -11,9 +11,19 @@
         <div class="list-group m-0" id="list-news">
             <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId" id="links-news">
                 <div class="row">
-                    <div class="col-md-3">
-                        <img src="~/images/logo-passagem-navbar.png">
-                    </div>
+                    @if (!String.IsNullOrEmpty(@obj.Imagem))
+                    {
+                        var imagePath = $"/Imagem/{@obj.Imagem}";
+                        <div class="col-md-3">
+                            <img src="@imagePath">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3">
+                            <img src="~/images/logo-passagem-navbar.png">
+                        </div>   
+                    }
                     <div class="col">
                         <h5 class="text-success">@obj.Titulo</h5>
                         <span>@obj.ResumoMateria</span>

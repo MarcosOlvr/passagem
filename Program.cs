@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Passagem.Data;
 using Microsoft.AspNetCore.Identity;
+using Passagem.Data.FileManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<PassagemContext>(options => options.UseSqlServer(
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<PassagemContext>();
+
+builder.Services.AddTransient<IFileManager, FileManager>();
 
 var app = builder.Build();
 
