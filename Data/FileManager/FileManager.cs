@@ -24,7 +24,7 @@
                     Directory.CreateDirectory(save_path);
                 }
 
-                var mime = imagem.FileName.Substring(imagem.FileName.LastIndexOf('.'), 2);
+                var mime = imagem.FileName.Substring(imagem.FileName.LastIndexOf('.'));
                 var fileName = $"img_{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}{mime}";
 
                 using (var fileStream = new FileStream(Path.Combine(save_path, fileName), FileMode.Create))

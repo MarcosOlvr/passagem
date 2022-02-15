@@ -21,15 +21,18 @@ namespace Passagem.Controllers
         [HttpGet("/Imagem/{imagem}")]
         public IActionResult Imagem (string imagem)
         {
-            var mime = imagem.Substring(imagem.LastIndexOf('.'), 1);
+            var mime = imagem.Substring(imagem.LastIndexOf('.') + 1);
             return new FileStreamResult(_fileManager.ImageStream(imagem), $"imagem/{mime}");
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var news = _db.Noticias.ToList();
-            return View(news);
+            var vm = new NewsIndexViewModel();
+            vm.ListaNoticias = _db.Noticias.ToList();
+            vm.ListaCategoria = _db.Categorias.ToList();
+
+            return View(vm);
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Noticias>
+﻿@model NewsIndexViewModel
 
 @{
     ViewData["Title"] = "Notícias";
@@ -6,16 +6,16 @@
 
 <div class="container p-3">
     <h2 class="text-light text-center bg-success py-1 border-3">Notícias</h2>
-    @foreach (var obj in Model)
+    @foreach (var obj in Model.ListaNoticias)
     {
         <div class="list-group m-0" id="list-news">
             <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId" id="links-news">
                 <div class="row">
-                    @if (!String.IsNullOrEmpty(@obj.Imagem))
+                     @if (!String.IsNullOrEmpty(@obj.Imagem))
                     {
                         var imagePath = $"/Imagem/{@obj.Imagem}";
-                        <div class="col-md-3">
-                            <img src="@imagePath">
+                        <div class="col-md-3 text-center">
+                            <img src="@imagePath" width="150">
                         </div>
                     }
                     else
@@ -28,12 +28,16 @@
                         <h5 class="text-success">@obj.Titulo</h5>
                         <span>@obj.ResumoMateria</span>
                     </div>
-                    <div class="col-md-1">
-                        <p>@obj.CriadoEm.Day/@obj.CriadoEm.Month/@obj.CriadoEm.Year</p>
-                    </div>  
-                    <div class="col-md-1">
-                        <span class="badge alert-warning mr-1 text-black p-2">@obj.Categoria</span>
-                    </div>       
+                    <div class="col-md-2 text-center">
+                        <p class="text-center">@obj.CriadoEm.Day/@obj.CriadoEm.Month/@obj.CriadoEm.Year</p>
+                        @foreach (var categoria in Model.ListaCategoria)
+                        {
+                            if (categoria.CategoriaId == @obj.CategoriaFK)
+                            {
+                                <span class="badge alert-warning mr-1 text-black p-2">@categoria.CategoriaNome</span>        
+                            }
+                        }
+                    </div>
                 </div>
             </a>
         </div>

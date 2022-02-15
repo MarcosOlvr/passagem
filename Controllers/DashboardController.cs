@@ -52,14 +52,18 @@ namespace Passagem.Controllers
         // POST: DashboardController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewsViewModel obj)
+        public async Task<IActionResult> Create(NewsViewModel obj)
         {
             ModelState.Remove("Noticias.Categoria");
+            ModelState.Remove("Noticias.Imagem");
 
             var categoriaById = _db.Categorias.Find(obj.Noticias.CategoriaFK);
 
             if (categoriaById != null)
                 obj.Noticias.Categoria = categoriaById;
+
+            if (obj.Imagem != null)
+                obj.Noticias.Imagem = await _fileManager.SaveImage(obj.Imagem);
 
             if (ModelState.IsValid)
             {

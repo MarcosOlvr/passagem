@@ -39,8 +39,8 @@
                 </select>
             </div>
             <div class="custom-file mb-3">
-                <input asp-for="Imagem" class="custom-file-input" id="validatedCustomFile" required>
-                <label class="custom-file-label" for="validatedCustomFile">Escolha o arquivo...</label>
+                <input asp-for="Imagem" class="custom-file-input" id="validatedCustomFile">
+                <label class="custom-file-label" asp-for="Imagem">Escolha o arquivo...</label>
                 <div class="invalid-feedback">Arquivo Inválido!</div>
             </div>
             <div class="mb-3">
