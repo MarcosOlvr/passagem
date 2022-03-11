@@ -1,0 +1,87 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Visualizar Usuários";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Usuários</h1>
+    <p class="mb-4">Este local serve para gerenciar todas as informações de usuários cadastrados em nosso banco de dados!</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="m-0 font-weight-bold text-primary">Tabela de Usuários</h6>
+                </div>
+                <div class="col-6 text-right">
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> &nbsp; Criar novo usuário
+                    </a>
+                </div>
+            </div> 
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Email (nome de usuário)</th>
+                            <th>Número de celular</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Email (nome de usuário)</th>
+                            <th>Número de celular</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var obj in Model.ListaUsers)
+                        {
+                            <form method="post">
+                            <tr>
+                                <td>@obj.Id</td>
+                                <td>@obj.UserName</td>
+                                @if (obj.PhoneNumber != null)
+                                    {
+                                        <td>@obj.PhoneNumber</td>
+                                    }
+                                    else
+                                    {   
+                                        <td>Não cadastrado!</td>
+                                    }
+                            </tr>
+                            <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TituloModalCentralizado">Confirmação</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja realmente deletar esta notícia?
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

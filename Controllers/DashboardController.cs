@@ -12,11 +12,13 @@ namespace Passagem.Controllers
     public class DashboardController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly PassagemContext _dbUser;
         private readonly IFileManager _fileManager;
 
-        public DashboardController(AppDbContext db, IFileManager fileManager)
+        public DashboardController(AppDbContext db, IFileManager fileManager, PassagemContext dbUser)
         {
             _db = db;
+            _dbUser = dbUser;
             _fileManager = fileManager;
         }
 
@@ -188,6 +190,14 @@ namespace Passagem.Controllers
         public IActionResult Page404()
         {
             return View();
+        }
+
+        public IActionResult VisualizarUsers()
+        {
+            var vm = new UserViewModel();
+            vm.ListaUsers = _dbUser.Users.ToList();
+
+            return View(vm);
         }
 
     }
