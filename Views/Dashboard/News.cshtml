@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-6 text-right">
                     <a asp-controller="Dashboard" asp-action="Create" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> &nbsp; Criar nova Notícia
+                        <i class="bi bi-plus-circle"></i> &nbsp; Criar nova notícia
                     </a>
                 </div>
             </div> 
@@ -52,12 +52,12 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var obj in Model.ListaNoticias)
+                        @foreach (var obj in Model.ListaNoticias.Reverse())
                         {
                             <form method="post">
                             <tr>
                                 <td>@obj.NoticiaId</td>
-                                <td>
+                                <td class="col-md-4">
                                     <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId">@obj.Titulo</a>
                                 </td>
                                 <td>@obj.CriadoEm</td>
@@ -71,12 +71,12 @@
                                 <td>Eu</td>
                                 <td class="text-center">
                                     <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.NoticiaId" class="btn btn-primary">
-                                        <i class="bi bi-pencil-square"></i> Editar
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                        <i class="bi bi-trash"></i> Excluir
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </td> 
                             </tr>
