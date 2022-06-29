@@ -5,42 +5,69 @@
 }
 
 <div class="container m-3">
-    <div class="col-lg-4 p-0">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="firstCarousel" class="carousel slide" data-ride="firstCarouselDR">
+        <ol class="carousel-indicators">
+            <li data-target="#firstCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#firstCarousel" data-slide-to="1"></li>
+            <li data-target="#firstCarousel" data-slide-to="2"></li>
+        </ol>
         <div class="carousel-inner">
-            @foreach (var obj in Model.ListaNoticias.TakeLast(3).Reverse())
-            {
-                if (obj.NoticiaId == Model.UltimaNoticia.NoticiaId)
-                {
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 h-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
-                        <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50">
-                            <h5>@obj.Titulo</h5>
-                            <p>@obj.ResumoMateria</p>
-                            <p>@obj.CriadoEm</p>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>@obj.Titulo</h5>
-                            <p>@obj.ResumoMateria</p>
-                            <p>@obj.CriadoEm</p>
-                        </div>
-                    </div>
-                }
-                
-            }
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="https://www2.natal.rn.gov.br/_anexos/banner/257.jpeg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://www2.natal.rn.gov.br/_anexos/banner/253.jpeg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://www2.natal.rn.gov.br/_anexos/banner/251.gif" alt="Third slide">
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#firstCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#firstCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
         </a>
     </div>
-    </div>
+    <section class="pt-3">
+        <div class="col-lg-5 p-0">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var obj in Model.ListaNoticias.TakeLast(3).Reverse())
+                    {
+                        if (obj.NoticiaId == Model.UltimaNoticia.NoticiaId)
+                        {
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
+                                <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50">
+                                    <h5>@obj.Titulo</h5>
+                                    <p>@obj.ResumoMateria</p>
+                                    <p>@obj.CriadoEm</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="~/images/caze.jpg" alt="@obj.ResumoMateria">
+                                <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50">
+                                    <h5>@obj.Titulo</h5>
+                                    <p>@obj.ResumoMateria</p>
+                                    <p>@obj.CriadoEm</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
