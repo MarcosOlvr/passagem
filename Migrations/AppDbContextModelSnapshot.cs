@@ -104,10 +104,18 @@ namespace Passagem.Migrations
 
                     b.Property<string>("Conteudo")
                         .IsRequired()
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DescricaoImagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResumoMateria")
                         .IsRequired()

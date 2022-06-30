@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-6 text-right">
                     <a asp-controller="Dashboard" asp-action="Create" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> &nbsp; Criar nova Notícia
+                        <i class="bi bi-plus-circle"></i> &nbsp; Criar nova notícia
                     </a>
                 </div>
             </div> 
@@ -52,11 +52,12 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var obj in Model.ListaNoticias)
+                        @foreach (var obj in Model.ListaNoticias.Reverse())
                         {
+                            <form method="post">
                             <tr>
                                 <td>@obj.NoticiaId</td>
-                                <td>
+                                <td class="col-md-4">
                                     <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId">@obj.Titulo</a>
                                 </td>
                                 <td>@obj.CriadoEm</td>
@@ -70,15 +71,35 @@
                                 <td>Eu</td>
                                 <td class="text-center">
                                     <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.NoticiaId" class="btn btn-primary">
-                                        <i class="bi bi-pencil-square"></i> Editar
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <a asp-controller="Dashboard" asp-action="Delete" asp-route-id="@obj.NoticiaId" class="btn btn-danger">
-                                        <i class="bi bi-trash"></i> Excluir
-                                    </a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                 </td> 
                             </tr>
+                            <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="TituloModalCentralizado">Confirmação</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja realmente deletar esta notícia?
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         }
                     </tbody>
                 </table>

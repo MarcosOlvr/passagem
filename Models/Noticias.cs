@@ -15,8 +15,10 @@ namespace Passagem.Models
         public string ResumoMateria { get; set; }
 
         [Required]
-        [Column(TypeName = "ntext")]
         public string Conteudo { get; set; }
+
+        public string Imagem { get; set; }
+        public string DescricaoImagem { get; set; }
 
         [ForeignKey("Categoria")]
         public int CategoriaFK { get; set; }

@@ -1,32 +1,50 @@
-﻿@model Noticias
+﻿@model VisualizarNoticiasViewModel
+
 @{
-    ViewData["Title"] = @Model.Titulo;
+    ViewData["Title"] = @Model.Noticia.Titulo;
 }
 
-<div class="container p-3 col-10">
+<div class="container-fluid border my-3 p-3 col-10">
     <div class="border-bottom pb-3">
-        <h1 class="text-success">@Model.Titulo</h1>
-        <p class="pt-2 text-muted">@Model.ResumoMateria</p>
-        <span class="bold">@Model.Categoria</span> <br />
-        <span>@Model.CriadoEm</span>
+        <h1 class="text-success text-center">@Model.Noticia.Titulo</h1>
+        <p class="pt-2 text-muted">@Model.Noticia.ResumoMateria</p>
+        @foreach (var categoria in Model.ListaCategorias)
+        {
+            if(categoria.CategoriaId == Model.Noticia.CategoriaFK)
+            {
+                <span class="bold">@categoria.CategoriaNome</span> <br />
+            }
+        }
+        <span>@Model.Noticia.CriadoEm</span>
     </div>
     <div class="text-center p-3">
         <img src="~/images/logo-passagem.png" />
-        <span class="d-block text-start text-muted">Descrição da imagem</span>
+        <span class="d-block text-right text-muted">Descrição da imagem</span>
     </div>
     <div class="border-bottom pb-3 text-break">
-        @Model.Conteudo
+        @Model.Noticia.Conteudo
     </div>
+
+    <p class="pt-2 mt-3 text-muted">Mais notícias dessa categoria</p>
     <div class="list-group mt-4" id="list-news">
-            <a class="list-group-item list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" id="links-news">
-                <div class="row">
-                    <div class="col-md-2">
-                        <p>Data aqui</p>
-                    </div>     
-                    <div class="col">
-                        <h6 class="text-success">Titulo aqui</h6>
-                    </div>
-                </div>
-            </a>
+            @foreach (var noticia in Model.ListaNoticias.Reverse())
+            {
+                @foreach (var categoria in Model.ListaCategorias)
+                {
+                    if (categoria.CategoriaId == noticia.CategoriaFK && noticia.CategoriaFK == Model.Noticia.CategoriaFK)
+                    {
+                        <a class="list-group-item border list-group-item-action" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@noticia.NoticiaId" id="links-news">   
+                        <div class="row">
+                                <div class="col-md-2">
+                                    <p>@noticia.CriadoEm</p>
+                                </div>     
+                                <div class="col">
+                                    <h6 class="text-success">@noticia.Titulo</h6>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+            }
     </div>
 </div>
