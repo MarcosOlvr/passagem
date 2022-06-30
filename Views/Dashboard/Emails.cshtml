@@ -29,7 +29,9 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">O que fazer?</div>
-                                    <a class="dropdown-item" href="#">Visualizar Mensagem</a>
+                                    <a asp-controller="Dashboard" asp-action="VisualizarEmail" asp-route-id="@obj.Id" class="dropdown-item">
+                                        Visualizar Mensagem
+                                    </a>
                                     <button type="button" class="dropdown-item">Excluir</button>
                                 </div>
                             </div>

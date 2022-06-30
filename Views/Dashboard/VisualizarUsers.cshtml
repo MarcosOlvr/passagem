@@ -1,27 +1,26 @@
-﻿@model NewsIndexViewModel
+﻿@model UserViewModel
 
 @{
-    ViewData["Title"] = "Dashboard - Notícias";
+    ViewData["Title"] = "Visualizar Usuários";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Notícias</h1>
-    <p class="mb-4">Este local serve para gerenciar todas as notícias do site, onde podemos criar, editar ou excluir qualquer informação!</p>
+    <h1 class="h3 mb-2 text-gray-800">Usuários</h1>
+    <p class="mb-4">Este local serve para gerenciar todas as informações de usuários cadastrados em nosso banco de dados!</p>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-6">
-                    <h6 class="m-0 font-weight-bold text-primary">Tabela de Notícias</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tabela de Usuários</h6>
                 </div>
                 <div class="col-6 text-right">
-                    <a asp-controller="Dashboard" asp-action="Create" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> &nbsp; Criar nova notícia
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> &nbsp; Criar novo usuário
                     </a>
                 </div>
             </div> 
@@ -32,53 +31,32 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Título</th>
-                            <th>Publicado em</th>
-                            <th>Categoria</th>
-                            <th>Autor</th>
-                            <th></th>
-                            <th></th>
+                            <th>Email (nome de usuário)</th>
+                            <th>Número de celular</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Título</th>
-                            <th>Publicado em</th>
-                            <th>Categoria</th>
-                            <th>Autor</th>
-                            <th></th>
-                            <th></th>
+                            <th>Email (nome de usuário)</th>
+                            <th>Número de celular</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var obj in Model.ListaNoticias.Reverse())
+                        @foreach (var obj in Model.ListaUsers)
                         {
                             <form method="post">
                             <tr>
-                                <td>@obj.NoticiaId</td>
-                                <td class="col-md-4">
-                                    <a class="nav-link" asp-controller="Noticias" asp-action="Visualizar" asp-route-id="@obj.NoticiaId">@obj.Titulo</a>
-                                </td>
-                                <td>@obj.CriadoEm</td>
-                                @foreach (var categoria in Model.ListaCategoria)
-                                {
-                                    if (categoria.CategoriaId == obj.CategoriaFK)
+                                <td>@obj.Id</td>
+                                <td>@obj.UserName</td>
+                                @if (obj.PhoneNumber != null)
                                     {
-                                        <td>@categoria.CategoriaNome</td>
+                                        <td>@obj.PhoneNumber</td>
                                     }
-                                }
-                                <td>Eu</td>
-                                <td class="text-center">
-                                    <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@obj.NoticiaId" class="btn btn-primary">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </td> 
+                                    else
+                                    {   
+                                        <td>Não cadastrado!</td>
+                                    }
                             </tr>
                             <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">

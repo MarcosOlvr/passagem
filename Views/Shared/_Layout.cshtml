@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/Passagem.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -51,7 +57,7 @@
                 </a>
                 <button class="navbar-toggler bg-success p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-second" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="text-light">Menu</span>
+                        <span class="text-light"></span>
                     <span class="text-light"><i class="bi bi-justify"></i></span>
                 </button>   
                     <div class="collapse navbar-collapse" id="navbar-collapse-second">
@@ -63,7 +69,7 @@
                               <a class="nav-link text-success px-4 line-height dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sobre</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item text-success" href="#">A Cidade</a>
-                                    <a class="dropdown-item text-success" href="#">O Prefeito</a>
+                                    <a class="dropdown-item text-success" href="#">Secretarias</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -75,7 +81,7 @@
                             <li class="nav-item">
                                 <form class="d-flex">
                                     <input class="form-control me-sm-2" type="text" placeholder="Pesquisar">
-                                    <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                                    <button class="btn btn-success my-2 my-sm-0 m-1" type="submit"><i class="bi bi-search"></i></button>
                                 </form>
                             </li>
                         </ul>
@@ -86,16 +92,14 @@
     </section>
 
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 mb-3">
             <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer-text bg-success text-center text-light bold">
-        <div class="container">
-            <div>R. Senador Dinarte Mariz, 288 - Centro, Passagem - RN, 59259-000 - Ouvidoria Geral (84) 3286-0029</div>
-        </div>
+    <footer class="footer-text bg-success text-center text-light bold">
+        <div>R. Senador Dinarte Mariz, 288 - Centro, Passagem - RN, 59259-000 - Ouvidoria Geral (84) 3286-0029</div>
     </footer>
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
